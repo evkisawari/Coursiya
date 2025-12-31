@@ -115,7 +115,7 @@ export const HeroSection = () => {
           <div className="relative animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
             <div className="relative rounded-2xl overflow-hidden shadow-2xl hover-lift">
               <img
-                src="https://images.unsplash.com/photo-1586717799252-bd134ad00e26?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwxfHxVSSUyMFVYJTIwZGVzaWdufGVufDB8fHx8MTc2NzA4NzE5MHww&ixlib=rb-4.1.0&q=85"
+                src="/images/Home-banner.webp"
                 alt="UI/UX Design Workshop"
                 className="w-full h-auto object-cover"
               />

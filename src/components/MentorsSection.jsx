@@ -8,14 +8,14 @@ export const MentorsSection = () => {
       name: 'Dheeraj S.',
       role: 'Senior UI/UX Designer',
       experience: '10+ Years Experience',
-      image: 'https://images.unsplash.com/photo-1653647054667-c99dc7f914ef?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzl8MHwxfHNlYXJjaHwxfHxGaWdtYSUyMGRlc2lnbnxlbnwwfHx8fDE3NjcwODcxOTV8MA&ixlib=rb-4.1.0&q=85',
+      image: '/images/dheeraj.webp',
       description: 'Expert in mobile app design with a track record of designing apps used by millions. Specialized in creating intuitive user experiences for food delivery and e-commerce platforms.'
     },
     {
       name: 'Hemanshi P.',
       role: 'Lead Product Designer',
       experience: '7+ Years Experience',
-      image: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwyfHxVSSUyMFVYJTIwZGVzaWdufGVufDB8fHx8MTc2NzA4NzE5MHww&ixlib=rb-4.1.0&q=85',
+      image: '/images/hemasnhi.webp',
       description: 'Passionate about user-centered design and Figma workflows. Has mentored 500+ aspiring designers and helped them land jobs at top tech companies.'
     }
   ];

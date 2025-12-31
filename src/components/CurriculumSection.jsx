@@ -97,7 +97,7 @@ export const CurriculumSection = () => {
                 Learn to design mobile apps inspired by Swiggy, Zomato, and Myntra
               </p>
               <img
-                src="https://images.unsplash.com/photo-1609921212029-bb5a28e60960?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBkZXNpZ258ZW58MHx8fHwxNzY3MDg3MjAwfDA&ixlib=rb-4.1.0&q=85"
+                src="/images/design-apps-banner.webp"
                 alt="Mobile App Design"
                 className="w-full h-auto rounded-xl shadow-lg"
               />
