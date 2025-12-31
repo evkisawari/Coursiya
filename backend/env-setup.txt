@@ -1,0 +1,13 @@
+# Environment Variables Setup
+
+Create a .env file in the backend directory with the following variables:
+
+PORT=5000
+RAZORPAY_KEY_ID=your_razorpay_key_id_here
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret_here
+
+# To get your Razorpay credentials:
+# 1. Go to https://dashboard.razorpay.com/app/keys
+# 2. Copy your Key ID and Key Secret
+# 3. Paste them in the .env file above
+

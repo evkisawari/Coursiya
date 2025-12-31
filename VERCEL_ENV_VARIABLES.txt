@@ -1,0 +1,39 @@
+==========================================
+VERCEL ENVIRONMENT VARIABLES
+Copy and paste these into Vercel
+==========================================
+
+1. REACT_APP_RAZORPAY_KEY_ID
+   Value: rzp_live_ReLpq6NsY8ZBqc
+   Environments: Production, Preview, Development
+
+2. RAZORPAY_KEY_ID
+   Value: rzp_live_ReLpq6NsY8ZBqc
+   Environments: Production, Preview, Development
+
+3. RAZORPAY_KEY_SECRET
+   Value: BR2AZUJ6Qo56RQdwnHdOpBLG
+   Environments: Production, Preview, Development
+
+4. RAZORPAY_WEBHOOK_SECRET (Optional)
+   Value: auraic-0DB0-2025
+   Environments: Production, Preview, Development
+
+==========================================
+QUICK COPY FORMAT:
+==========================================
+
+Key: REACT_APP_RAZORPAY_KEY_ID
+Value: rzp_live_ReLpq6NsY8ZBqc
+
+Key: RAZORPAY_KEY_ID
+Value: rzp_live_ReLpq6NsY8ZBqc
+
+Key: RAZORPAY_KEY_SECRET
+Value: BR2AZUJ6Qo56RQdwnHdOpBLG
+
+Key: RAZORPAY_WEBHOOK_SECRET
+Value: auraic-0DB0-2025
+
+==========================================
+

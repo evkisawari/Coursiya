@@ -1,0 +1,25 @@
+{
+  "environmentVariables": [
+    {
+      "key": "REACT_APP_RAZORPAY_KEY_ID",
+      "value": "rzp_live_ReLpq6NsY8ZBqc",
+      "environments": ["production", "preview", "development"]
+    },
+    {
+      "key": "RAZORPAY_KEY_ID",
+      "value": "rzp_live_ReLpq6NsY8ZBqc",
+      "environments": ["production", "preview", "development"]
+    },
+    {
+      "key": "RAZORPAY_KEY_SECRET",
+      "value": "BR2AZUJ6Qo56RQdwnHdOpBLG",
+      "environments": ["production", "preview", "development"]
+    },
+    {
+      "key": "RAZORPAY_WEBHOOK_SECRET",
+      "value": "auraic-0DB0-2025",
+      "environments": ["production", "preview", "development"]
+    }
+  ]
+}
+
