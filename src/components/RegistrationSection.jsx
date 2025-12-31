@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+const API = BACKEND_URL ? `${BACKEND_URL}/api` : null;
 
 export const RegistrationSection = () => {
   const [formData, setFormData] = useState({
@@ -42,26 +42,39 @@ export const RegistrationSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // Validate backend URL
+    if (!API || !BACKEND_URL) {
+      toast.error('Backend URL is not configured. Please check your environment variables.');
+      console.error('REACT_APP_BACKEND_URL is not set');
+      return;
+    }
+
+    // Validate Razorpay Key ID
+    if (!process.env.REACT_APP_RAZORPAY_KEY_ID) {
+      toast.error('Razorpay Key ID is not configured. Please check your environment variables.');
+      console.error('REACT_APP_RAZORPAY_KEY_ID is not set');
+      return;
+    }
+    
     if (!razorpayLoaded) {
       toast.error('Payment system is loading. Please try again.');
       return;
     }
 
     setIsSubmitting(true);
-    console.log(
-      "ENV KEY =>",
-      process.env.REACT_APP_RAZORPAY_KEY_ID
-    );
-    
 
     try {
-      // Get Razorpay configuration
-            // Create order
+      // Create order
       const orderResponse = await axios.post(`${API}/create-order`, {
         amount: 9900, // ₹99 in paise
         currency: 'INR',
         registration_data: formData
       });
+
+      // Validate response
+      if (!orderResponse.data || !orderResponse.data.order_id) {
+        throw new Error('Invalid response from server');
+      }
 
       const { order_id, amount, currency } = orderResponse.data;
 
@@ -89,10 +102,13 @@ export const RegistrationSection = () => {
                 description: 'Check your email for workshop details and joining link.'
               });
               setFormData({ name: '', email: '', phone: '' });
+            } else {
+              toast.error('Payment verification failed. Please contact support.');
             }
           } catch (error) {
             console.error('Payment verification error:', error);
-            toast.error('Payment verification failed. Please contact support.');
+            const errorMessage = error.response?.data?.message || error.message || 'Payment verification failed';
+            toast.error(errorMessage);
           } finally {
             setIsSubmitting(false);
           }
@@ -114,10 +130,33 @@ export const RegistrationSection = () => {
       };
 
       const razorpay = new window.Razorpay(options);
+      razorpay.on('payment.failed', function (response) {
+        console.error('Payment failed:', response.error);
+        toast.error(`Payment failed: ${response.error.description || 'Unknown error'}`);
+        setIsSubmitting(false);
+      });
       razorpay.open();
     } catch (error) {
       console.error('Payment initiation error:', error);
-      toast.error('Failed to initiate payment. Please try again.');
+      
+      // Provide more specific error messages
+      let errorMessage = 'Failed to initiate payment. Please try again.';
+      
+      if (error.response) {
+        // Server responded with error status
+        errorMessage = error.response.data?.message || error.response.data?.error || errorMessage;
+        console.error('Server error:', error.response.status, error.response.data);
+      } else if (error.request) {
+        // Request was made but no response received
+        errorMessage = 'Unable to connect to server. Please check if the backend is running.';
+        console.error('Network error:', error.request);
+      } else {
+        // Something else happened
+        errorMessage = error.message || errorMessage;
+        console.error('Error:', error.message);
+      }
+      
+      toast.error(errorMessage);
       setIsSubmitting(false);
     }
   };
