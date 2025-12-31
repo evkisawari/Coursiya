@@ -65,6 +65,10 @@ export const RegistrationSection = () => {
     setIsSubmitting(true);
 
     try {
+      // Log API endpoint for debugging
+      console.log('Calling API:', `${API}/create-order`);
+      console.log('Backend URL:', BACKEND_URL);
+      
       // Create order
       const orderResponse = await axios.post(`${API}/create-order`, {
         amount: 9900, // ₹99 in paise
@@ -139,25 +143,47 @@ export const RegistrationSection = () => {
       razorpay.open();
     } catch (error) {
       console.error('Payment initiation error:', error);
+      console.error('Full error details:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+        url: error.config?.url,
+        request: error.request
+      });
       
       // Provide more specific error messages
       let errorMessage = 'Failed to initiate payment. Please try again.';
       
       if (error.response) {
         // Server responded with error status
-        errorMessage = error.response.data?.message || error.response.data?.error || errorMessage;
-        console.error('Server error:', error.response.status, error.response.data);
+        const status = error.response.status;
+        const data = error.response.data;
+        
+        if (status === 404) {
+          errorMessage = 'API endpoint not found. Please check if serverless functions are deployed.';
+        } else if (status === 500) {
+          errorMessage = data?.message || data?.error || 'Server error. Please check Vercel function logs.';
+        } else {
+          errorMessage = data?.message || data?.error || `Server error (${status})`;
+        }
+        
+        console.error('Server error:', status, data);
       } else if (error.request) {
         // Request was made but no response received
-        errorMessage = 'Unable to connect to server. Please check if the backend is running.';
-        console.error('Network error:', error.request);
+        errorMessage = `Unable to connect to server at ${API}/create-order. Please check if the API is deployed and environment variables are set.`;
+        console.error('Network error - No response received:', {
+          url: `${API}/create-order`,
+          backendUrl: BACKEND_URL
+        });
       } else {
         // Something else happened
         errorMessage = error.message || errorMessage;
         console.error('Error:', error.message);
       }
       
-      toast.error(errorMessage);
+      toast.error(errorMessage, {
+        description: 'Check browser console for details'
+      });
       setIsSubmitting(false);
     }
   };
