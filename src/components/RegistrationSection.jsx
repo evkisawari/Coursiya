@@ -48,13 +48,15 @@ export const RegistrationSection = () => {
     }
 
     setIsSubmitting(true);
+    console.log(
+      "ENV KEY =>",
+      process.env.REACT_APP_RAZORPAY_KEY_ID
+    );
+    
 
     try {
       // Get Razorpay configuration
-      const configResponse = await axios.get(`${API}/razorpay-config`);
-      const { key_id } = configResponse.data;
-
-      // Create order
+            // Create order
       const orderResponse = await axios.post(`${API}/create-order`, {
         amount: 9900, // ₹99 in paise
         currency: 'INR',
@@ -65,7 +67,7 @@ export const RegistrationSection = () => {
 
       // Razorpay options
       const options = {
-        key: key_id,
+        key: process.env.REACT_APP_RAZORPAY_KEY_ID,
         amount: amount,
         currency: currency,
         order_id: order_id,
